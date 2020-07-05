@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+//import './index.css';
+//import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import CssBaseline from '@material-ui/core/CssBaseline'
+import AppContainer from './comps/AppContainer.comp'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CssBaseline />
+    <AppContainer />
   </React.StrictMode>,
   document.getElementById('root')
 );
