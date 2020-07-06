@@ -1,10 +1,11 @@
 //
 import React, {useState} from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { loginActionCreator, changeMessage, changeStatusAsBusy } from '../actions'
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-let LoginFormComponent = (props)=>{
+let LoginFormComponent = ()=>{
     const classes = useStyles();
 
     const dispatch = useDispatch()
@@ -26,10 +27,16 @@ let LoginFormComponent = (props)=>{
     let [password, setPassword] = useState('Pass')
 
     const onLoginButtonClick = ()=>{
-        dispatch( loginActionCreator( {username,password} ) )
-        dispatch( changeMessage('Hello Sunlight') )
         dispatch( changeStatusAsBusy(true) )
+        dispatch( loginActionCreator( {
+            pUserId : username,
+            pUserPw : password
+        } ) )
+        //dispatch( changeMessage('Hello Sunlight') )
     }
+
+    // Redux Store
+    const appMessages = useSelector( state=> state.messages )
     
 
     return(
@@ -37,7 +44,8 @@ let LoginFormComponent = (props)=>{
         <React.Fragment>
         <Paper elevation={4}>
 
-            { username } | { password }
+            <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={100} />
+            
 
             <form className={classes.margin} noValidate autoComplete="off">
                 <Typography variant="h6"> Login </Typography>
@@ -49,7 +57,6 @@ let LoginFormComponent = (props)=>{
                 <TextField id="outlined-basic" label="Password" variant="outlined" type="password" fullWidth onChange={ event => setPassword(event.target.value)  }/>
             </form>
             <form className={classes.margin} noValidate autoComplete="off">
-                {/* <Button variant="outlined" color="primary" onClick={() => { props.onLogin({uname:username,upass:password}) }}> Login </Button> */}
                 <Button variant="outlined" color="primary" onClick={onLoginButtonClick}> Login </Button>
             </form>
             <span> &nbsp; </span>

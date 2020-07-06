@@ -2,50 +2,36 @@
 // version - 1.0.0
 //
 
+import ApiObj from '../utils/api'
 
-const testCallAPI = ()=> fetch('https://httpbin.org/get');
-/*
-export const loginActionCreator = loginObj=>{
-    return ({
-        type: 'NEW_MESSAGE',
-        payload: loginObj.username
-    })
-}
-*/
-/*
-export const loginActionCreator = loginObj=>{
-    return dispatch=>{
-        return testCallAPI().then(
-                success=> dispatch( successLoginAction( loginObj, success) ),
-                error=> dispatch( failLoginAction( loginObj, error) )
-            )
-    }
-}
-*/
-const call_LoginAPI = (loginObj) => {
-    /*
-    const url_1 = apiObj.endpoint + apiObj.version + '/loginClinic';
+const call_LoginDoctorAPI = (loginObj) => {
+    const url_1 = ApiObj.endpoint + ApiObj.version + ApiObj.post.loginDoctor
     const fetch_data = {
       method: 'POST', mode: 'cors', headers: new Headers({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify(payload)
-    };
-    */
-    const url_1 = 'https://httpbin.org/get';
-    return fetch(url_1)
+      body: JSON.stringify(loginObj)
+    }
+    return fetch(url_1, fetch_data)
   }
 export const loginActionCreator = loginObj=>{
     return function (dispatch) {
-        call_LoginAPI(loginObj).then(
+        call_LoginDoctorAPI(loginObj).then(
             success => {
-                console.log('success');
+                console.log('SUCCESS : call_LoginDoctorAPI :');
                 //console.log(success);
                 success.json().then(function(result){
-                  console.log('result', result)
+                  console.log('RESULT : call_LoginDoctorAPI :', result)
+                  // result.success
+                  // result.data
+                  if(result.success===false){
+                    dispatch( changeLoginStatus(false) )
+                  }else{
+                    dispatch(loginStatusAndData({ isLoggedIn: true, loginUserObject: result.data}))
+                  }
                   dispatch( changeStatusAsBusy(false) )
                 })
               },
               error => {
-                console.log('error')
+                console.log('ERROR : call_LoginDoctorAPI :')
                 console.log(error)
                 dispatch( changeStatusAsBusy(false) )
               }
@@ -55,7 +41,7 @@ export const loginActionCreator = loginObj=>{
 
 const successLoginAction = ()=> ({type:'LOGIN_SUCCESS'})
 const failLoginAction = ()=> ({type:'LOGIN_FAIL'})
-
+// message
 export const changeMessage = message=> {
     return ({
         type: 'NEW_MESSAGE',
@@ -68,3 +54,16 @@ export const changeStatusAsBusy = status=> {
         payload: status
     })
 }
+// Login
+export const changeLoginStatus = status=>({
+  type: 'UPDATE_LOGIN_STATUS',
+  payload: status
+})
+export const updateLoginData = loginData=>({
+  type: 'UPDATE_LOGIN_OBJECT',
+  payload: loginData
+})
+export const loginStatusAndData = loginStatusData=>({
+  type: 'UPDATE_LOGIN_STATUS_AND_OBJECT',
+  payload: loginStatusData
+})

@@ -27,12 +27,13 @@ const MaterialAppContainer = (props)=>{
     const classes = useStyles()
 
     const appMessages = useSelector( state=> state.messages )
+    const loginData = useSelector( state=> state.loginData )
 
 
     return(
     <div className={classes.root}>
       
-      { props.isLogedIn ? <AppbarMenu /> : "Please Login" }
+      { loginData.isLoggedIn ? <AppbarMenu /> : "Please Login" }
       
       <main className={classes.content}>
         <div className={classes.toolbar} /> {/* To shift the whole thing a little down, so that the first few lines do not go under the Toolbar */}
@@ -40,8 +41,8 @@ const MaterialAppContainer = (props)=>{
 
         <div> Message : { appMessages.message } </div>
         <div> Is Busy : { '--'+appMessages.isBusy+'--' } </div>
-
-        <LoginFormComponent onLogin={props.onLogin} />
+        
+        { loginData.isLoggedIn ? '' : <LoginFormComponent /> }
         
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt

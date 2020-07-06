@@ -4,35 +4,14 @@ import React from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import MaterialAppContainer from './MaterialAppContainer'
 
-class AppContainer extends React.Component {
-
-  constructor(){
-    super();
-    //
-    this.state = {
-      userIsLoggedIn : false
-    }
-    //
-    this.onLoginButtonClick = this.onLoginButtonClick.bind(this);
-  }
-  onLoginButtonClick = (loginObj)=>{
-    console.log(new Date() + 'onLoginButtonClick')
-    console.log( loginObj )
-  }
-
-  render(){
-    /*
-    const onLoginButtonClick = ()=>{
-      console.log(new Date() + 'onLoginButtonClick')
-    }
-    */
+  const AppContainer = ()=>{
     return (
       <React.Fragment>
         <CssBaseline />
-        <MaterialAppContainer isLogedIn={this.state.userIsLoggedIn} onLogin={this.onLoginButtonClick}/>
+        <MaterialAppContainer />
       </React.Fragment>
     );
   }
-}
+
 
 export default AppContainer
