@@ -27,7 +27,7 @@ let LoginFormComponent = (props)=>{
 
     const onLoginButtonClick = ()=>{
         dispatch( loginActionCreator( {username,password} ) )
-        //dispatch( changeMessage('Hello Sunlight') )
+        dispatch( changeMessage('Hello Sunlight') )
         dispatch( changeStatusAsBusy(true) )
     }
     

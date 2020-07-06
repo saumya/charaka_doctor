@@ -3,13 +3,15 @@
 //
 
 
-let testCallAPI = ()=> fetch('https://httpbin.org/get');
-export const loginActionCreator = payload=>{
+const testCallAPI = ()=> fetch('https://httpbin.org/get');
+/*
+export const loginActionCreator = loginObj=>{
     return ({
         type: 'NEW_MESSAGE',
-        payload: payload.username
+        payload: loginObj.username
     })
 }
+*/
 /*
 export const loginActionCreator = loginObj=>{
     return dispatch=>{
@@ -20,6 +22,37 @@ export const loginActionCreator = loginObj=>{
     }
 }
 */
+const call_LoginAPI = (loginObj) => {
+    /*
+    const url_1 = apiObj.endpoint + apiObj.version + '/loginClinic';
+    const fetch_data = {
+      method: 'POST', mode: 'cors', headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(payload)
+    };
+    */
+    const url_1 = 'https://httpbin.org/get';
+    return fetch(url_1)
+  }
+export const loginActionCreator = loginObj=>{
+    return function (dispatch) {
+        call_LoginAPI(loginObj).then(
+            success => {
+                console.log('success');
+                //console.log(success);
+                success.json().then(function(result){
+                  console.log('result', result)
+                  dispatch( changeStatusAsBusy(false) )
+                })
+              },
+              error => {
+                console.log('error')
+                console.log(error)
+                dispatch( changeStatusAsBusy(false) )
+              }
+        )
+    }
+}
+
 const successLoginAction = ()=> ({type:'LOGIN_SUCCESS'})
 const failLoginAction = ()=> ({type:'LOGIN_FAIL'})
 
