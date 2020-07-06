@@ -19,21 +19,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
-//const drawerWidth = 240;
+import AppbarMenu from './AppbarMenu.comp'
 
 const useStyles = makeStyles((theme) => ({
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-    list: {
-        width: 250,
-      },
-    fullList: {
-        width: 'auto',
-    },
     // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar,
     content: {
@@ -46,50 +34,13 @@ const useStyles = makeStyles((theme) => ({
 export default function AppContainer() {
   const classes = useStyles();
 
-  const [shouldShowSidebar, setShouldShowSidebar] = useState(false);
-
-  const showSideBar = ()=> setShouldShowSidebar(true)
-  const hideSideBar = ()=> setShouldShowSidebar(false)
   
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={showSideBar}>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}> Doctor </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="temporary" anchor="left" open={ shouldShowSidebar } onClose={ hideSideBar }>
-        <div className={classes.toolbar} />
-        <Divider />
-        <List>
-            <ListItem button key='profile'>
-              <ListItemIcon><InboxIcon /></ListItemIcon>
-              <ListItemText primary='Profile' />
-            </ListItem>
-            <ListItem button key='schedules'>
-              <ListItemIcon><MailIcon /></ListItemIcon>
-              <ListItemText primary='Schedules' />
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
-            <ListItem button key='login'>
-              <ListItemIcon><MailIcon /></ListItemIcon>
-              <ListItemText primary='Login' />
-            </ListItem>
-            <ListItem button key='logout'>
-              <ListItemIcon><MailIcon /></ListItemIcon>
-              <ListItemText primary='Logout' />
-            </ListItem>
-        </List>
-      </Drawer>
+      <AppbarMenu />
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+        <div className={classes.toolbar} /> {/* To shift the whole thing a little down, so that the first few lines do not go under the Toolbar */}
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
@@ -101,6 +52,17 @@ export default function AppContainer() {
           imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
           arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
           donec massa sapien faucibus et molestie ac.
+        </Typography>
+        <Typography paragraph>
+          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
+          facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
+          tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
+          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
+          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
+          hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
+          tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
+          nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
+          accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
         </Typography>
         <Typography paragraph>
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
