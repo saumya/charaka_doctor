@@ -1,5 +1,7 @@
 //
 import React, {useState} from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { loginActionCreator, changeMessage, changeStatusAsBusy } from '../actions'
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -15,11 +17,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const LoginFormComponent = (props)=>{
+let LoginFormComponent = (props)=>{
     const classes = useStyles();
-    
+
+    const dispatch = useDispatch()
+
     let [username, setUsername] = useState('Rama')
     let [password, setPassword] = useState('Pass')
+
+    const onLoginButtonClick = ()=>{
+        dispatch( loginActionCreator( {username,password} ) )
+        //dispatch( changeMessage('Hello Sunlight') )
+        dispatch( changeStatusAsBusy(true) )
+    }
+    
 
     return(
         <React.StrictMode>
@@ -38,7 +49,8 @@ const LoginFormComponent = (props)=>{
                 <TextField id="outlined-basic" label="Password" variant="outlined" type="password" fullWidth onChange={ event => setPassword(event.target.value)  }/>
             </form>
             <form className={classes.margin} noValidate autoComplete="off">
-                <Button variant="outlined" color="primary" onClick={() => { props.onLogin({uname:username,upass:password}) }}> Login </Button>
+                {/* <Button variant="outlined" color="primary" onClick={() => { props.onLogin({uname:username,upass:password}) }}> Login </Button> */}
+                <Button variant="outlined" color="primary" onClick={onLoginButtonClick}> Login </Button>
             </form>
             <span> &nbsp; </span>
         
@@ -48,4 +60,4 @@ const LoginFormComponent = (props)=>{
     )
 }
 
-export default LoginFormComponent
+export default connect()(LoginFormComponent)

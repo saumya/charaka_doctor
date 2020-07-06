@@ -7,11 +7,20 @@ import * as serviceWorker from './serviceWorker';
 import CssBaseline from '@material-ui/core/CssBaseline'
 import AppContainer from './comps/AppContainer.comp'
 
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import allInOneReducer from './reducers'
+
+const theAppStore = createStore( allInOneReducer )
+
 ReactDOM.render(
+  <Provider store={ theAppStore }>
   <React.Fragment>
     <CssBaseline />
     <AppContainer />
-  </React.Fragment>,
+  </React.Fragment>
+  </Provider>,
   document.getElementById('root')
 );
 

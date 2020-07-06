@@ -1,6 +1,7 @@
 //
-import React from 'react';
+import React from 'react'
 
+import CssBaseline from '@material-ui/core/CssBaseline'
 import MaterialAppContainer from './MaterialAppContainer'
 
 class AppContainer extends React.Component {
@@ -27,6 +28,7 @@ class AppContainer extends React.Component {
     */
     return (
       <React.Fragment>
+        <CssBaseline />
         <MaterialAppContainer isLogedIn={this.state.userIsLoggedIn} onLogin={this.onLoginButtonClick}/>
       </React.Fragment>
     );
