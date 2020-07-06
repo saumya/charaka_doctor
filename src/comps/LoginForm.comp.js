@@ -1,5 +1,5 @@
 //
-import React from 'react'
+import React, {useState} from 'react'
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -15,25 +15,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const LoginFormComponent = ()=>{
+const LoginFormComponent = (props)=>{
     const classes = useStyles();
+    
+    let [username, setUsername] = useState('Rama')
+    let [password, setPassword] = useState('Pass')
+
     return(
         <React.StrictMode>
         <React.Fragment>
         <Paper elevation={4}>
 
-            
+            { username } | { password }
+
             <form className={classes.margin} noValidate autoComplete="off">
                 <Typography variant="h6"> Login </Typography>
             </form>
             <form className={classes.margin} noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Use Id" variant="outlined" fullWidth />
+                <TextField id="outlined-basic" label="Use Id" variant="outlined" fullWidth onChange={ event => setUsername(event.target.value)  } />
             </form>
             <form className={classes.margin} noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Password" variant="outlined" type="password" fullWidth />
+                <TextField id="outlined-basic" label="Password" variant="outlined" type="password" fullWidth onChange={ event => setPassword(event.target.value)  }/>
             </form>
             <form className={classes.margin} noValidate autoComplete="off">
-                <Button variant="outlined" color="primary" onClick={() => { alert('clicked') }}> Login </Button>
+                <Button variant="outlined" color="primary" onClick={() => { props.onLogin({uname:username,upass:password}) }}> Login </Button>
             </form>
             <span> &nbsp; </span>
         
