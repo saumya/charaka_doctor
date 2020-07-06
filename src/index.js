@@ -8,10 +8,10 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import AppContainer from './comps/AppContainer.comp'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <CssBaseline />
     <AppContainer />
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 

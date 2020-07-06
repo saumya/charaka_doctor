@@ -1,25 +1,16 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 
+
+import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 
 import AppbarMenu from './AppbarMenu.comp'
+import LoginFormComponent from './LoginForm.comp'
 
 const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
@@ -29,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
     },
+
 }));
 
 export default function AppContainer() {
@@ -41,6 +33,8 @@ export default function AppContainer() {
       <AppbarMenu />
       <main className={classes.content}>
         <div className={classes.toolbar} /> {/* To shift the whole thing a little down, so that the first few lines do not go under the Toolbar */}
+        {/* Main Content is below this. */}
+        <LoginFormComponent />
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
