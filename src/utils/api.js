@@ -6,7 +6,9 @@ const apiObj = {
     post: {
         loginDoctor: '/loginDoctor',
     },
-    put: {},
+    put: {
+        update_doctor : '/updateDoctor/',
+    },
     delete: {}
 }
 export default apiObj

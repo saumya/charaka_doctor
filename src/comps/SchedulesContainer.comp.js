@@ -9,7 +9,7 @@ const SchedulesContainer = ()=>{
     return(
         <React.Fragment>
             <div> Schedules </div>
-            <div> All My Schedules </div>
+            <div> All My Schedules</div>
         </React.Fragment>
     )
 }
