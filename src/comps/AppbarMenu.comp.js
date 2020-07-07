@@ -1,5 +1,7 @@
 //
 import React, { useState } from 'react'
+import { connect, useDispatch, useSelector } from 'react-redux'
+
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 
@@ -15,8 +17,15 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+import { menuNavigationAction, changeLoginStatus } from '../actions'
+
 
 //const drawerWidth = 240;
 
@@ -45,39 +54,44 @@ const useStyles = makeStyles( (theme) => ({
 const AppbarMenu = ()=>{
     
     const classes = useStyles();
+
     const [shouldShowSidebar, setShouldShowSidebar] = useState(false)
+
     const showSideBar = ()=> setShouldShowSidebar(true)
     const hideSideBar = ()=> setShouldShowSidebar(false)
+
+    const loginData = useSelector( state=> state.loginData )
+    const dispatch = useDispatch()
 
     return(
         <React.Fragment>
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={showSideBar}>
-                    <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" className={classes.title}> Doctor </Typography>
-                {/* <Button color="inherit">Logout</Button> */}
-                <Typography variant="h6"> Sun Moon Clinic </Typography>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={showSideBar}>
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" className={classes.title}> Doctor | {loginData.loginUserObject.name} </Typography>
+                    
+                    <Typography variant="h6"> Sun Moon Clinic </Typography>
                 </Toolbar>
             </AppBar>
             <Drawer variant="temporary" anchor="left" open={ shouldShowSidebar } onClose={ hideSideBar }>
                 <div className={classes.toolbar} />
                 <Divider />
                 <List>
-                    <ListItem button key='profile'>
-                    <ListItemIcon><InboxIcon /></ListItemIcon>
-                    <ListItemText primary='Profile' />
+                    <ListItem button key='profile' onClick={() => dispatch( menuNavigationAction('PROFILE') )}>
+                        <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+                        <ListItemText primary='Profile' />
                     </ListItem>
-                    <ListItem button key='schedules'>
-                    <ListItemIcon><MailIcon /></ListItemIcon>
-                    <ListItemText primary='Schedules' />
+                    <ListItem button key='schedules' onClick={() => dispatch( menuNavigationAction('SCHEDULE') )}>
+                        <ListItemIcon><ScheduleIcon /></ListItemIcon>
+                        <ListItemText primary='Schedules' />
                     </ListItem>
                 </List>
                 <Divider />
                 <List>
-                    <ListItem button key='logout'>
-                    <ListItemIcon><MailIcon /></ListItemIcon>
+                    <ListItem button key='logout' onClick={() => dispatch( changeLoginStatus(false) )}>
+                    <ListItemIcon><ExitToAppIcon /></ListItemIcon>
                     <ListItemText primary='Logout' />
                     </ListItem>
                 </List>
@@ -87,4 +101,4 @@ const AppbarMenu = ()=>{
 
 }
 
-export default AppbarMenu
+export default connect()(AppbarMenu)

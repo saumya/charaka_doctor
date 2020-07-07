@@ -29,11 +29,15 @@ const MaterialAppContainer = (props)=>{
     const appMessages = useSelector( state=> state.messages )
     const loginData = useSelector( state=> state.loginData )
 
+    const menuData = useSelector( state=> state.menuNavigationData )
+
 
     return(
     <div className={classes.root}>
       
       { loginData.isLoggedIn ? <AppbarMenu /> : "Please Login" }
+      
+      
       
       <main className={classes.content}>
         <div className={classes.toolbar} /> {/* To shift the whole thing a little down, so that the first few lines do not go under the Toolbar */}
@@ -41,8 +45,14 @@ const MaterialAppContainer = (props)=>{
 
         <div> Message : { appMessages.message } </div>
         <div> Is Busy : { '--'+appMessages.isBusy+'--' } </div>
+
+        { JSON.stringify(menuData) }
         
         { loginData.isLoggedIn ? '' : <LoginFormComponent /> }
+
+        { (menuData.active_menu==='PROFILE') ? <div> Profile Component </div> : "" }
+        { (menuData.active_menu==='SCHEDULE') ? <div> Schedule Component </div> : "" }
+        { (menuData.active_menu==='LOG_OUT') ? <div> Logout </div> : "" }
         
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt

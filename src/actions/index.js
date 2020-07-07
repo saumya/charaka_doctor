@@ -67,3 +67,9 @@ export const loginStatusAndData = loginStatusData=>({
   type: 'UPDATE_LOGIN_STATUS_AND_OBJECT',
   payload: loginStatusData
 })
+
+// Menu Navigation
+export const menuNavigationAction = menuName=>({
+  type: 'MENU_NAVIGATION',
+  payload: menuName
+})
