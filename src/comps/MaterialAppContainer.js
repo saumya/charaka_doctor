@@ -11,6 +11,10 @@ import Typography from '@material-ui/core/Typography'
 import AppbarMenu from './AppbarMenu.comp'
 import LoginFormComponent from './LoginForm.comp'
 
+import ProfileContainer from './ProfileContainer.comp'
+import SchedulesContainer from './SchedulesContainer.comp'
+
+
 
 const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
@@ -50,9 +54,9 @@ const MaterialAppContainer = (props)=>{
         
         { loginData.isLoggedIn ? '' : <LoginFormComponent /> }
 
-        { (menuData.active_menu==='PROFILE') ? <div> Profile Component </div> : "" }
-        { (menuData.active_menu==='SCHEDULE') ? <div> Schedule Component </div> : "" }
-        { (menuData.active_menu==='LOG_OUT') ? <div> Logout </div> : "" }
+        { (loginData.isLoggedIn && menuData.active_menu==='PROFILE') ? <ProfileContainer /> : "" }
+        { (loginData.isLoggedIn && menuData.active_menu==='SCHEDULE') ? <SchedulesContainer /> : "" }
+        { (loginData.isLoggedIn && menuData.active_menu==='LOG_OUT') ? <div> Logout </div> : "" }
         
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
