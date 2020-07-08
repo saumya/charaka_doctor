@@ -44,7 +44,7 @@ let LoginFormComponent = ()=>{
         <React.Fragment>
         <Paper elevation={4}>
 
-            <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={100} />
+            <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
             
 
             <form className={classes.margin} noValidate autoComplete="off">

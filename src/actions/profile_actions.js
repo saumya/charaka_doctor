@@ -3,6 +3,7 @@
 //
 
 import ApiObj from '../utils/api'
+import {changeStatusAsBusy} from '.'
 
 //const updateProfileSuccessAction = ()=> ({type:'UPDATE_USER_PROFILE_SUCCESS'})
 //const updateProfileFailAction = ()=> ({type:'UPDATE_USER_PROFILE_FAIL'})
@@ -28,19 +29,23 @@ const call_UpdateProfileAPI = (userObj)=>{
   
 export const updateUserProfileAction = updatedUserObject=>{
     return function(dispatch){
+        dispatch( changeStatusAsBusy(true) )
         call_UpdateProfileAPI(updatedUserObject).then(function(success){
-        console.log( 'updateUserProfileAction : UPDATE_PROFILE_SUCCESS' )
-        console.log( success )
-        success.json().then(function(result_data){
-            console.log('updateUserProfileAction : UPDATE_PROFILE_SUCCESS : RESULT')
-            console.log( result_data )
-        }).catch(function(error_2){
-            console.log('updateUserProfileAction : UPDATE_PROFILE_SUCCESS : ERROR_2')
-            console.log(error_2)
-        })
+            console.log( 'updateUserProfileAction : UPDATE_PROFILE_SUCCESS' )
+            console.log( success )
+            success.json().then(function(result_data){
+                console.log('updateUserProfileAction : UPDATE_PROFILE_SUCCESS : RESULT')
+                console.log( result_data )
+                dispatch( changeStatusAsBusy(false) )
+            }).catch(function(error_2){
+                console.log('updateUserProfileAction : UPDATE_PROFILE_SUCCESS : ERROR_2')
+                console.log(error_2)
+                dispatch( changeStatusAsBusy(false) )
+            })
         },function(error){
-        console.log( 'updateUserProfileAction : UPDATE_PROFILE_FAIL' )
-        console.log( error )
+            console.log( 'updateUserProfileAction : UPDATE_PROFILE_FAIL' )
+            console.log( error )
+            dispatch( changeStatusAsBusy(false) )
         })
     } 
 }

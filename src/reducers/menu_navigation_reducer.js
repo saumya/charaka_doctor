@@ -3,7 +3,7 @@
 
 const initialState = {
     last_menu: '',
-    active_menu: 'PROFILE'
+    active_menu: ''
 }
 
 const menu_navigation = (state = initialState, action)=>{
