@@ -3,7 +3,7 @@
 //
 
 const initialState = {
-    all_schedules_for_doctor: {}
+    all_schedules_for_doctor: []
 }
 
 const SchedulesReducer = (state=initialState, action)=>{
