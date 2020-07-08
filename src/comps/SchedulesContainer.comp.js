@@ -14,6 +14,8 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
+import TableSchedules from './TableSchedules.comp'
+
 const useStyles = makeStyles((theme) => ({
     margin: {
       margin: theme.spacing(1),
@@ -65,7 +67,14 @@ const SchedulesContainer = ()=>{
 
             <Paper elevation={4}>
             <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
-            <SchedulesList list_data={schedules.all_schedules_for_doctor} />
+            { 
+                (document.body.clientWidth>800) 
+                ? <TableSchedules table_data={schedules.all_schedules_for_doctor} /> 
+                : <SchedulesList list_data={schedules.all_schedules_for_doctor} /> 
+            }
+            
+            
+            
             </Paper>
         </React.Fragment>
     )

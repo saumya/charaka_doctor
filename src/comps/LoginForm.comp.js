@@ -3,13 +3,13 @@ import React, {useState} from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { loginActionCreator, changeMessage, changeStatusAsBusy } from '../actions'
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles((theme) => ({
     margin: {
