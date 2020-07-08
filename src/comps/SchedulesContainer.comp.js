@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
 import TableSchedules from './TableSchedules.comp'
+import ListSchedulesComponent from './ListSchedules.comp'
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -47,10 +48,9 @@ const SchedulesContainer = ()=>{
         //let listOfSchedules = schedules.all_schedules_for_doctor.map(function(item){
         let listOfSchedules = props.list_data.map(function(item){
             let oneRow = <li key={item.id}>
-                            <div>Appointment Id : {item.id}</div>
-                            <div>{item.on_date}</div>
-                            <div>{item.is_morning? "Morning" : "Evening"}</div>
-                            { JSON.stringify(item) }
+                            <span>Id : {item.id} - </span>
+                            <span>On : {item.on_date} - </span>
+                            <span>{item.is_morning? "Morning" : "Evening"}</span>
                         </li>
             return oneRow
         })
@@ -67,14 +67,18 @@ const SchedulesContainer = ()=>{
 
             <Paper elevation={4}>
             <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
-            { 
+            
+            {/* Render as per Screen Width */}
+            { /*
                 (document.body.clientWidth>800) 
                 ? <TableSchedules table_data={schedules.all_schedules_for_doctor} /> 
                 : <SchedulesList list_data={schedules.all_schedules_for_doctor} /> 
+                */
             }
+
+            { <ListSchedulesComponent list_data={schedules.all_schedules_for_doctor} /> }
             
-            
-            
+            <div> &nbsp; </div>
             </Paper>
         </React.Fragment>
     )
