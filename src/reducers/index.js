@@ -7,11 +7,13 @@ import { combineReducers } from 'redux'
 import messages from './messages'
 import menuNavigationReducer from './menu_navigation_reducer'
 import loginReducer from './login_reducer'
+import schedulesReducer from './schedules_reducer'
 
 
 const theReducer = combineReducers({
     messages: messages,
     menuNavigationData: menuNavigationReducer,
-    loginData: loginReducer
+    loginData: loginReducer,
+    schedulesData: schedulesReducer
 })
 export default theReducer

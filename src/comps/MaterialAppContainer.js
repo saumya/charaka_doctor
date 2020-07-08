@@ -39,7 +39,7 @@ const MaterialAppContainer = (props)=>{
     return(
     <div className={classes.root}>
       
-      { loginData.isLoggedIn ? <AppbarMenu /> : "Please Login" }
+      { loginData.isLoggedIn ? <AppbarMenu /> : "" }
       
       
       
@@ -47,10 +47,9 @@ const MaterialAppContainer = (props)=>{
         <div className={classes.toolbar} /> {/* To shift the whole thing a little down, so that the first few lines do not go under the Toolbar */}
         {/* Main Content is below this. */}
 
-        <div> Message : { appMessages.message } </div>
-        <div> Is Busy : { '--'+appMessages.isBusy+'--' } </div>
-
-        { JSON.stringify(menuData) }
+        {/* <div> Message : { appMessages.message } </div> */}
+        {/* <div> Is Busy : { '--'+appMessages.isBusy+'--' } </div> */}
+        {/* JSON.stringify(menuData) */}
         
         { loginData.isLoggedIn ? '' : <LoginFormComponent /> }
 
@@ -58,6 +57,7 @@ const MaterialAppContainer = (props)=>{
         { (loginData.isLoggedIn && menuData.active_menu==='SCHEDULE') ? <SchedulesContainer /> : "" }
         { (loginData.isLoggedIn && menuData.active_menu==='LOG_OUT') ? <div> Logout </div> : "" }
         
+        {/*
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
@@ -70,6 +70,8 @@ const MaterialAppContainer = (props)=>{
           arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
           donec massa sapien faucibus et molestie ac.
         </Typography>
+        */}
+
       </main>
     </div>
     )

@@ -10,6 +10,7 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 
 import {updateUserProfileAction} from '../actions'
@@ -17,10 +18,6 @@ import {updateUserProfileAction} from '../actions'
 const useStyles = makeStyles((theme) => ({
     margin: {
       margin: theme.spacing(1),
-    },
-    title: {
-        color: "#000000",
-        fontSize: "3em"
     },
 }));
 
@@ -42,7 +39,8 @@ const ProfileContainer = ()=> {
     return(
         <React.Fragment>
             {/* JSON.stringify(localUserObj) */}
-            <h1 className={classes.title}>Profile</h1>
+            
+            <Typography variant="h2" gutterBottom>Profile</Typography>
 
             <Paper elevation={4}>
             <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />

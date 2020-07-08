@@ -10,10 +10,10 @@ const menu_navigation = (state = initialState, action)=>{
     switch (action.type){
         case 'MENU_NAVIGATION':
             return { last_menu: state.active_menu, active_menu: action.payload }
-            break;
+            //break;
         default : 
             return state
-            break;
+            //break;
     }
 }
 

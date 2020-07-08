@@ -7,6 +7,7 @@ import ApiObj from '../utils/api'
 //export { loginActionCreator } from "./login_actions"
 export * from "./login_actions"
 export * from './profile_actions'
+export * from './schedule_actions'
 
 // message
 export const changeMessage = message=> {
