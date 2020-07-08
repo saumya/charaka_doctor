@@ -44,7 +44,13 @@ const SchedulesContainer = ()=>{
     const SchedulesList = function(props){
         //let listOfSchedules = schedules.all_schedules_for_doctor.map(function(item){
         let listOfSchedules = props.list_data.map(function(item){
-            return <li key={item.id}>{ JSON.stringify(item) }</li>
+            let oneRow = <li key={item.id}>
+                            <div>Appointment Id : {item.id}</div>
+                            <div>{item.on_date}</div>
+                            <div>{item.is_morning? "Morning" : "Evening"}</div>
+                            { JSON.stringify(item) }
+                        </li>
+            return oneRow
         })
         return (<ul>{listOfSchedules}</ul>)
     }
