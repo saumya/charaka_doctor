@@ -9,6 +9,7 @@ const apiObj = {
     /* =============================== PUT ================================== */
     put: {
         update_doctor : '/updateDoctor/',
+        update_schedule : '/updateSchedule/',
     },
     /* =============================== DELETE ================================== */
     delete: {},

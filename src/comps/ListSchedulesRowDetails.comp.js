@@ -2,12 +2,23 @@
 // ListSchedulesRowDetails.comp.js
 //
 
-import React from 'react'
+import React, {useState} from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { updateSinlgeScheduleForDoctorAction } from '../actions'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+
+import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -16,31 +27,79 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+// Component
 const ListSchedulesRowDetailsComponent = (props)=>{
     const classes = useStyles(); // MaterialUI
 
+    const dispatch = useDispatch() // React-Redux
+
     const detailObj = props.data
+    const [isWeb, setIsWeb]= useState(detailObj.isWeb)
+    const [webTime, setWebTime]= useState(detailObj.web_at_time)
+    //const [webURL, setWebURL]= useState(detailObj.webURL)
+
+    const toggleWebChecked = ()=>{
+        setIsWeb( !isWeb )
+    }
+    
+    const onUpdateSchedule = ()=>{
+        //console.log('onUpdateSchedule')
+        //console.log( 'old=',detailObj )
+
+        //console.log('isWeb', isWeb)
+        //console.log('webTime',webTime)
+        //let webURL = '';
+        const webURL = 'https://meet.jit.si/' + 'FindHealthToday_'
+                                                + detailObj.groupId + '_'
+                                                + detailObj.doctorId + '_'
+                                                + detailObj.personId + '_'
+                                                + webTime
+        const newSchedule = {...detailObj, isWeb:isWeb, web_at_time:webTime, webURL}
+        console.log('onUpdateSchedule : schedule =', newSchedule)
+        dispatch( updateSinlgeScheduleForDoctorAction(newSchedule) )
+    }
+    const onPrescription = ()=>{
+        console.log( detailObj )
+    }
 
     return(
         <React.Fragment>
-        <Paper variant="outlined" >
-        <div style={{ background: "#CCC", margin: "1em", padding: "1em" }}>
-            { JSON.stringify(detailObj) }
+        
+        <Card>
+      <CardContent>
+        <Typography color="textSecondary" gutterBottom>
+          Details
+        </Typography>
+        
+        <Typography color="textSecondary">
+            Id : {detailObj.id} | {detailObj.on_date} | {(detailObj.is_morning) ? "Morning" : "Evening"} 
+        </Typography>
+        <FormGroup>
+            {/* ref: https://stackoverflow.com/questions/47012169/a-component-is-changing-an-uncontrolled-input-of-type-text-to-be-controlled-erro */}
+            <FormControlLabel control={<Switch onChange={toggleWebChecked} checked={isWeb || false} />} label="Is Web Meeting?" />
+        </FormGroup>
+        
+        <div>
+            { isWeb ?
+                <React.Fragment>
+                <form className={classes.margin} noValidate autoComplete="off">
+                    <TextField id="outlined-basic" 
+                        label="Web Meeting At Time" variant="outlined" fullWidth 
+                        onChange={ event=>setWebTime(event.target.value) }
+                        value={webTime || ''} />
+                </form>
+                </React.Fragment>
+             : ""}
         </div>
-            <form className={classes.margin} noValidate autoComplete="off">
-                <Typography variant="h6"> Appointment Id : {detailObj.id} </Typography>
-                <Typography variant="h6"> Date : {detailObj.on_date} </Typography>
-                <Typography variant="h6"> Morning : {(detailObj.is_morning) ? "YES" : "NO"} </Typography>
-                <Typography variant="h6"> Attended : {(detailObj.isAttended) ? "YES" : "NO"} </Typography>
-                <Typography variant="h6"> Web : {(detailObj.isWeb) ? "YES" : "NO"} </Typography>
-                <Typography variant="h6"> webURL : {detailObj.webURL} </Typography>
-            </form>
-            <form className={classes.margin} noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Web Meeting At Time" variant="outlined" fullWidth> {detailObj.web_at_time} </TextField>
-            </form>
-        </Paper>
+      </CardContent>
+      <CardActions>
+        <Button size="small" variant="outlined" color="primary" onClick={onUpdateSchedule}> Update </Button>
+        <Button size="small" variant="outlined" color="primary" onClick={onPrescription}> Prescription </Button>
+      </CardActions>
+      </Card>
+
         </React.Fragment>
     )
 }
 
-export default ListSchedulesRowDetailsComponent
+export default connect()(ListSchedulesRowDetailsComponent)

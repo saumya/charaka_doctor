@@ -34,9 +34,32 @@ export const getSchedulesForDoctorAction = userId=>{
     } 
 }
 
-
-
 const updateSchedulesForDoctorAction = (schedules)=>({
     type: 'UPDATE_SCHEDULES_FOR_DOCTOR',
     payload: schedules
 })
+
+// =============
+// === updateSinlgeScheduleForDoctorAction ===
+export const updateSinlgeScheduleForDoctorAction = schedule=>{
+    return function(dispatch){
+        dispatch( changeStatusAsBusy(true) )
+        call_UpdateSingleScheduleAPI(schedule).then(function(success){
+            console.log( 'call_UpdateSinnlgeScheduleAPI : SUCCESS' )
+            console.log('success', success)
+        },function(error_1){
+            console.log( 'call_UpdateSinnlgeScheduleAPI : ERROR' )
+            console.log( error_1 )
+        })
+    }
+}
+// === updateSinlgeScheduleForDoctorAction / ===
+const call_UpdateSingleScheduleAPI = (schedule)=>{
+    const url_1 = ApiObj.endpoint + ApiObj.version + ApiObj.put.update_schedule
+    const fetch_data = {
+        method: 'PUT', 
+        mode: 'cors', headers: new Headers({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify(schedule)
+    }
+    return fetch(url_1,fetch_data)
+}
