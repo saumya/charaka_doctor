@@ -2,13 +2,19 @@
 const apiObj = {
     endpoint : 'http://localhost:3000/api',
     version : '/v1',
-    get: {},
+    /* =============================== POST ================================== */
     post: {
         loginDoctor: '/loginDoctor',
     },
+    /* =============================== PUT ================================== */
     put: {
         update_doctor : '/updateDoctor/',
     },
-    delete: {}
+    /* =============================== DELETE ================================== */
+    delete: {},
+    /* =============================== GET ================================== */
+    get: {
+        all_schedules_by_doctor_id : '/getSchedulesByDoctorId/',
+    }
 }
 export default apiObj
