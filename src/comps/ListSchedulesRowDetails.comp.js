@@ -58,8 +58,11 @@ const ListSchedulesRowDetailsComponent = (props)=>{
         console.log('onUpdateSchedule : schedule =', newSchedule)
         dispatch( updateSinlgeScheduleForDoctorAction(newSchedule) )
     }
-    const onPrescription = ()=>{
-        console.log( detailObj )
+    const onJoinWebConference = ()=>{
+      window.console.log('onJoinWebConference', detailObj.webURL)
+      const windowFeatures = "menubar=no,location=no,resizable=yes,scrollbars=no,status=no"
+      const newWindow = window.open(detailObj.webURL, 'FH:WebConferencing', windowFeatures)
+      window.console.log('newWindow:', newWindow )
     }
 
     return(
@@ -67,12 +70,14 @@ const ListSchedulesRowDetailsComponent = (props)=>{
         
         <Card>
       <CardContent>
-        <Typography color="textSecondary" gutterBottom>
-          Details
-        </Typography>
+        <Typography color="textSecondary" gutterBottom> Schedule Details </Typography>
         
         <Typography color="textSecondary">
-            Id : {detailObj.id} | {detailObj.on_date} | {(detailObj.is_morning) ? "Morning" : "Evening"} 
+            <span> Id : {detailObj.id} | {detailObj.on_date} | {(detailObj.is_morning) ? "Morning" : "Evening"} </span>
+            { 
+              detailObj.isWeb ? 
+              <Button size="small" variant="outlined" color="primary" onClick={onJoinWebConference}> Join Web </Button> : ""
+            }
         </Typography>
         <FormGroup>
             {/* ref: https://stackoverflow.com/questions/47012169/a-component-is-changing-an-uncontrolled-input-of-type-text-to-be-controlled-erro */}
@@ -94,7 +99,7 @@ const ListSchedulesRowDetailsComponent = (props)=>{
       </CardContent>
       <CardActions>
         <Button size="small" variant="outlined" color="primary" onClick={onUpdateSchedule}> Update </Button>
-        <Button size="small" variant="outlined" color="primary" onClick={onPrescription}> Prescription </Button>
+            {/* <Button size="small" variant="outlined" color="primary" onClick={onPrescription}> Prescription </Button> */}
       </CardActions>
       </Card>
 

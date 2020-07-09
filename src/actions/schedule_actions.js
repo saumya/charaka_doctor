@@ -47,9 +47,11 @@ export const updateSinlgeScheduleForDoctorAction = schedule=>{
         call_UpdateSingleScheduleAPI(schedule).then(function(success){
             console.log( 'call_UpdateSinnlgeScheduleAPI : SUCCESS' )
             console.log('success', success)
+            dispatch( changeStatusAsBusy(false) )
         },function(error_1){
             console.log( 'call_UpdateSinnlgeScheduleAPI : ERROR' )
             console.log( error_1 )
+            dispatch( changeStatusAsBusy(false) )
         })
     }
 }
