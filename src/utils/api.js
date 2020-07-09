@@ -5,6 +5,7 @@ const apiObj = {
     /* =============================== POST ================================== */
     post: {
         loginDoctor: '/loginDoctor',
+        create_prescription : '/createPrescription/',
     },
     /* =============================== PUT ================================== */
     put: {

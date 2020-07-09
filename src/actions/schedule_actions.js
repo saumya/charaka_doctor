@@ -39,7 +39,7 @@ const updateSchedulesForDoctorAction = (schedules)=>({
     payload: schedules
 })
 
-// =============
+
 // === updateSinlgeScheduleForDoctorAction ===
 export const updateSinlgeScheduleForDoctorAction = schedule=>{
     return function(dispatch){
@@ -55,7 +55,6 @@ export const updateSinlgeScheduleForDoctorAction = schedule=>{
         })
     }
 }
-// === updateSinlgeScheduleForDoctorAction / ===
 const call_UpdateSingleScheduleAPI = (schedule)=>{
     const url_1 = ApiObj.endpoint + ApiObj.version + ApiObj.put.update_schedule
     const fetch_data = {
@@ -65,3 +64,35 @@ const call_UpdateSingleScheduleAPI = (schedule)=>{
     }
     return fetch(url_1,fetch_data)
 }
+// === updateSinlgeScheduleForDoctorAction / ===
+// === create Prescription ===
+export const createPrescriptionAction = prescription=>{
+    return function(dispatch){
+        dispatch( changeStatusAsBusy(true) )
+        call_CreatePrescriptionAPI(prescription).then(function(success){
+            console.log('createPrescriptionAction : SUCCESS :')
+            dispatch( changeStatusAsBusy(false) )
+            success.json().then(function(result){
+                console.log('createPrescriptionAction : SUCCESS : RESULT :')
+                console.log(result)
+            }).catch(function(error_2){
+                console.log('createPrescriptionAction : SUCCESS : ERROR :')
+            })
+        },function(error){
+            console.log('createPrescriptionAction : ERROR :', error)
+            dispatch( changeStatusAsBusy(false) )
+        })
+
+    }
+}
+
+const call_CreatePrescriptionAPI = (prescription)=>{
+    const url_1 = ApiObj.endpoint + ApiObj.version + ApiObj.post.create_prescription
+    const fetch_data = {
+        method: 'POST', 
+        mode: 'cors', headers: new Headers({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify(prescription)
+    }
+    return fetch(url_1,fetch_data)
+}
+// === create Prescription / ===

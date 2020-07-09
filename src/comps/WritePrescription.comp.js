@@ -3,6 +3,9 @@
 //
 
 import React, {useState} from 'react'
+import { connect, useDispatch, useSelector } from 'react-redux'
+import { createPrescriptionAction } from '../actions'
+
 
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -15,6 +18,7 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WritePrescriptionComponent = (props)=>{
+    const dispatch = useDispatch()
+
     const classes = useStyles()
 
     const today = new Date()
@@ -81,7 +87,8 @@ const WritePrescriptionComponent = (props)=>{
             personId: props.data.personId,
             clinicId: props.data.groupId
         }
-        console.log( PrescriptionData )
+        //console.log( PrescriptionData )
+        dispatch( createPrescriptionAction(PrescriptionData) )
     }
     return(
         <React.Fragment>
@@ -129,4 +136,4 @@ const WritePrescriptionComponent = (props)=>{
     )
 }
 
-export default WritePrescriptionComponent
+export default connect()(WritePrescriptionComponent)

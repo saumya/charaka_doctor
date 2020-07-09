@@ -79,6 +79,7 @@ const SchedulesContainer = ()=>{
             { <ListSchedulesComponent list_data={schedules.all_schedules_for_doctor} /> }
             
             <div> &nbsp; </div>
+            <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
             </Paper>
         </React.Fragment>
     )
