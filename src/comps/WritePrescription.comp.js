@@ -1,0 +1,132 @@
+// Component
+// WritePrescription.comp.js
+//
+
+import React, {useState} from 'react'
+
+import { makeStyles } from '@material-ui/core/styles'
+
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import Button from '@material-ui/core/Button'
+
+import LinearProgress from '@material-ui/core/LinearProgress'
+
+import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
+
+
+const useStyles = makeStyles((theme) => ({
+    margin: {
+      margin: theme.spacing(1),
+    },
+    DateContainer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        margin: theme.spacing(1),
+    },
+    DateTextField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+    },
+}));
+
+const WritePrescriptionComponent = (props)=>{
+    const classes = useStyles()
+
+    const today = new Date()
+    const mString = today=>{
+        let m = today.getMonth()+1
+        if(m<10){
+            return ( '0' + m  )
+        }
+        return m
+    }
+    const dString = today=>{
+        if(today.getDate()<10){
+            return ( '0' + today.getDate() )
+        }
+        return today.getDate()
+    }
+    const dateString = today.getFullYear()+'-'+ mString(today) +'-'+ dString(today)
+
+    let [observations, setObservations] = useState('')
+    let [tests, setTests] = useState('')
+    let [medicines, setMedicines] = useState('')
+    let [advices, setAdvices] = useState('')
+    let [details, setDetails] = useState('')
+    let [followupDate, setFollowupDate] = useState(dateString)
+
+    const onPrescription = ()=>{
+        console.log( 'onPrescription' )
+        // props.data.id
+        //
+        //console.log( JSON.stringify(props.data) )
+        //console.log( observations, tests, advices, details )
+
+        const PrescriptionData = {
+            name: 'Prescription',
+            onDate: props.data.on_date,
+            observations: observations,
+            advice: advices,
+            tests: tests,
+            details: details,
+            
+            medicines: medicines,
+            followupDate: followupDate,
+
+            doctorId: props.data.doctorId,
+            personId: props.data.personId,
+            clinicId: props.data.groupId
+        }
+        console.log( PrescriptionData )
+    }
+    return(
+        <React.Fragment>
+            <div style={{ marginRight: "1em" }}>
+                <h1>Write Prescription</h1>
+                
+                <Card>
+                    <CardContent>
+                        <div style={{ background:"#f5f5dc"}}>
+                            {/* JSON.stringify(props) doctorId, personId, groupId */}
+                        </div>
+                        <div>
+                            <form className={classes.margin} noValidate autoComplete="off">
+                                <Typography variant="h6"> Schedule Id : { props.data.id } </Typography>
+                            </form>
+                            <form className={classes.margin} noValidate autoComplete="off">
+                                <TextField label="Observations" variant="outlined" fullWidth onChange={ event => setObservations(event.target.value) } />
+                            </form>
+                            <form className={classes.margin} noValidate autoComplete="off">
+                                <TextField label="Tests" variant="outlined" fullWidth onChange={ event => setTests(event.target.value) } />
+                            </form>
+                            <form className={classes.margin} noValidate autoComplete="off">
+                                <TextField label="Medicines" variant="outlined" fullWidth onChange={ event => setMedicines(event.target.value) } />
+                            </form>
+                            <form className={classes.margin} noValidate autoComplete="off">
+                                <TextField label="Advices" variant="outlined" fullWidth onChange={ event => setAdvices(event.target.value) } />
+                            </form>
+                            <form className={classes.DateContainer} noValidate autoComplete="off">
+                                <Typography variant="h6"> FollowUp date {followupDate} </Typography>
+                                <TextField className={classes.DateTextField} label="FollowUp Date" defaultValue={followupDate} type="date" onChange={ event => setFollowupDate(event.target.value) } />
+                            </form>
+                            <form className={classes.margin} noValidate autoComplete="off">
+                                <TextField label="Details" variant="outlined" fullWidth onChange={ event => setDetails(event.target.value) } />
+                            </form>
+                        </div>
+                    </CardContent>
+                    <CardActions>
+                        <Button size="small" color="secondary" onClick={onPrescription}> Prescription Done </Button>
+                    </CardActions>
+                </Card>
+                <h5>Make sure to click "Prescription Done" button Above</h5>
+            </div>
+            
+        </React.Fragment>
+    )
+}
+
+export default WritePrescriptionComponent

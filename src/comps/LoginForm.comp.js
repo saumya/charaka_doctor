@@ -45,20 +45,21 @@ let LoginFormComponent = ()=>{
         <Paper elevation={4}>
 
             <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
-            
 
+            <div style={{margin:"2em"}}>
             <form className={classes.margin} noValidate autoComplete="off">
                 <Typography variant="h6"> Login </Typography>
             </form>
             <form className={classes.margin} noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Use Id" variant="outlined" fullWidth onChange={ event => setUsername(event.target.value)  } />
+                <TextField label="Use Id" variant="outlined" fullWidth onChange={ event => setUsername(event.target.value)  } />
             </form>
             <form className={classes.margin} noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Password" variant="outlined" type="password" fullWidth onChange={ event => setPassword(event.target.value)  }/>
+                <TextField label="Password" variant="outlined" type="password" fullWidth onChange={ event => setPassword(event.target.value)  }/>
             </form>
             <form className={classes.margin} noValidate autoComplete="off">
                 <Button variant="outlined" color="primary" onClick={onLoginButtonClick}> Login </Button>
             </form>
+            </div>
             <span> &nbsp; </span>
         
         </Paper>
