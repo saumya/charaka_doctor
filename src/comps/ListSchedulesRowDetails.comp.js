@@ -66,43 +66,46 @@ const ListSchedulesRowDetailsComponent = (props)=>{
     }
 
     return(
-        <React.Fragment>
+      <React.Fragment>
+        <div style={{ marginRight: "1em" }}>
+          
+          <Card>
+            <CardContent>
+              <Typography color="textSecondary" gutterBottom> Schedule Details </Typography>
+              
+              <Typography color="textSecondary">
+                  <span> Id : {detailObj.id} | {detailObj.on_date} | {(detailObj.is_morning) ? "Morning" : "Evening"} </span>
+                  { 
+                    detailObj.isWeb ? 
+                    <Button size="small" variant="outlined" color="primary" onClick={onJoinWebConference}> Join Web </Button> : ""
+                  }
+              </Typography>
+              <FormGroup>
+                  {/* ref: https://stackoverflow.com/questions/47012169/a-component-is-changing-an-uncontrolled-input-of-type-text-to-be-controlled-erro */}
+                  <FormControlLabel control={<Switch onChange={toggleWebChecked} checked={isWeb || false} />} label="Is Web Meeting?" />
+              </FormGroup>
+              
+              <div>
+                  { isWeb ?
+                      <React.Fragment>
+                      <form className={classes.margin} noValidate autoComplete="off">
+                          <TextField id="outlined-basic" 
+                              label="Web Meeting At Time" variant="outlined" fullWidth 
+                              onChange={ event=>setWebTime(event.target.value) }
+                              value={webTime || ''} />
+                      </form>
+                      </React.Fragment>
+                  : ""}
+              </div>
+            </CardContent>
+            <CardActions>
+              <Button size="small" variant="outlined" color="secondary" onClick={onUpdateSchedule}> Update </Button>
+                  {/* <Button size="small" variant="outlined" color="primary" onClick={onPrescription}> Prescription </Button> */}
+            </CardActions>
+          </Card>
+          <h5>Make sure to click "Update" button Above</h5>
         
-        <Card>
-          <CardContent>
-            <Typography color="textSecondary" gutterBottom> Schedule Details </Typography>
-            
-            <Typography color="textSecondary">
-                <span> Id : {detailObj.id} | {detailObj.on_date} | {(detailObj.is_morning) ? "Morning" : "Evening"} </span>
-                { 
-                  detailObj.isWeb ? 
-                  <Button size="small" variant="outlined" color="primary" onClick={onJoinWebConference}> Join Web </Button> : ""
-                }
-            </Typography>
-            <FormGroup>
-                {/* ref: https://stackoverflow.com/questions/47012169/a-component-is-changing-an-uncontrolled-input-of-type-text-to-be-controlled-erro */}
-                <FormControlLabel control={<Switch onChange={toggleWebChecked} checked={isWeb || false} />} label="Is Web Meeting?" />
-            </FormGroup>
-            
-            <div>
-                { isWeb ?
-                    <React.Fragment>
-                    <form className={classes.margin} noValidate autoComplete="off">
-                        <TextField id="outlined-basic" 
-                            label="Web Meeting At Time" variant="outlined" fullWidth 
-                            onChange={ event=>setWebTime(event.target.value) }
-                            value={webTime || ''} />
-                    </form>
-                    </React.Fragment>
-                : ""}
-            </div>
-          </CardContent>
-          <CardActions>
-            <Button size="small" variant="outlined" color="primary" onClick={onUpdateSchedule}> Update </Button>
-                {/* <Button size="small" variant="outlined" color="primary" onClick={onPrescription}> Prescription </Button> */}
-          </CardActions>
-      </Card>
-
+        </div>
       </React.Fragment>
     )
 }

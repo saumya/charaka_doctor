@@ -65,6 +65,8 @@ const WritePrescriptionComponent = (props)=>{
     let [details, setDetails] = useState('')
     let [followupDate, setFollowupDate] = useState(dateString)
 
+    //let [showPatientdetailsUI, setWhetherToShowPatientDetailsUI] = useState(false)
+
     const onPrescription = ()=>{
         console.log( 'onPrescription' )
         // props.data.id
@@ -90,6 +92,22 @@ const WritePrescriptionComponent = (props)=>{
         //console.log( PrescriptionData )
         dispatch( createPrescriptionAction(PrescriptionData) )
     }
+    
+    /*
+    const onPatientDetailsClick = ()=>{
+        setWhetherToShowPatientDetailsUI( !showPatientdetailsUI )
+    }
+    
+    const PatientDetailsUI = (props)=>{
+        return(
+            <div>
+                <h1>Patient Details</h1>
+                <h2>Id {props.patientID}</h2>
+            </div>
+        )
+    }
+    */
+    //
     return(
         <React.Fragment>
             <div style={{ marginRight: "1em" }}>
@@ -97,8 +115,12 @@ const WritePrescriptionComponent = (props)=>{
                 
                 <Card>
                     <CardContent>
-                        <div style={{ background:"#f5f5dc"}}>
+                        <div style={{ background:"#fff"}}>
                             {/* JSON.stringify(props) doctorId, personId, groupId */}
+                            { /*
+                            <Button size="small" variant="contained" color="secondary" onClick={ onPatientDetailsClick }> Details of Patient </Button>
+                            { showPatientdetailsUI ? <PatientDetailsUI patientID={props.data.personId} /> : ""}
+                            */ }
                         </div>
                         <div>
                             <form className={classes.margin} noValidate autoComplete="off">
@@ -126,7 +148,7 @@ const WritePrescriptionComponent = (props)=>{
                         </div>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" color="secondary" onClick={onPrescription}> Prescription Done </Button>
+                        <Button size="small" variant="outlined" color="secondary" onClick={onPrescription}> Prescription Done </Button>
                     </CardActions>
                 </Card>
                 <h5>Make sure to click "Prescription Done" button Above</h5>
