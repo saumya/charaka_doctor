@@ -48,7 +48,7 @@ const ProfileContainer = ()=> {
                 <TextField label="Use Id" variant="outlined" fullWidth disabled value={localUserObj.id}   />
             </form>
             <form className={classes.margin} noValidate autoComplete="off">
-                <TextField label="password" variant="outlined" fullWidth value={localUserObj.password}  />
+                <TextField label="password" variant="outlined" fullWidth value={localUserObj.password} onChange={ event => setLocalUSerObj({ ...localUserObj, password:event.target.value}) } />
             </form>
             <form className={classes.margin} noValidate autoComplete="off">
                 <TextField label="Name" variant="outlined" fullWidth value={localUserObj.name} onChange={ event => setLocalUSerObj({ ...localUserObj, name:event.target.value}) } />

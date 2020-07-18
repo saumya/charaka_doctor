@@ -5,6 +5,7 @@ import { loginActionCreator, changeMessage, changeStatusAsBusy } from '../action
 
 import { makeStyles } from '@material-ui/core/styles'
 
+import Container from '@material-ui/core/Container'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
@@ -25,44 +26,58 @@ let LoginFormComponent = ()=>{
 
     let [username, setUsername] = useState('Rama')
     let [password, setPassword] = useState('Pass')
+    let [isFirstTime, setIsfirstTime] = useState(true)
 
     const onLoginButtonClick = ()=>{
+        setIsfirstTime(false)
+
         dispatch( changeStatusAsBusy(true) )
         dispatch( loginActionCreator( {
             pUserId : username,
             pUserPw : password
         } ) )
-        //dispatch( changeMessage('Hello Sunlight') )
     }
 
     // Redux Store
     const appMessages = useSelector( state=> state.messages )
+    const loginData = useSelector( state=> state.loginData )
     
 
     return(
         <React.StrictMode>
         <React.Fragment>
+        <Container fixed maxWidth="sm">
         <Paper elevation={4}>
 
             <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
 
             <div style={{margin:"2em"}}>
-            <form className={classes.margin} noValidate autoComplete="off">
-                <Typography variant="h6"> Login </Typography>
-            </form>
-            <form className={classes.margin} noValidate autoComplete="off">
-                <TextField label="Use Id" variant="outlined" fullWidth onChange={ event => setUsername(event.target.value)  } />
-            </form>
-            <form className={classes.margin} noValidate autoComplete="off">
-                <TextField label="Password" variant="outlined" type="password" fullWidth onChange={ event => setPassword(event.target.value)  }/>
-            </form>
-            <form className={classes.margin} noValidate autoComplete="off">
-                <Button variant="outlined" color="primary" onClick={onLoginButtonClick}> Login </Button>
-            </form>
+                <form className={classes.margin} noValidate autoComplete="off">
+                    <Typography variant="h6"> Login | Doctor </Typography>
+                </form>
+                <form className={classes.margin} noValidate autoComplete="off">
+                    <TextField label="Use Id" variant="outlined" fullWidth onChange={ event => setUsername(event.target.value)  } />
+                </form>
+                <form className={classes.margin} noValidate autoComplete="off">
+                    <TextField label="Password" variant="outlined" type="password" fullWidth onChange={ event => setPassword(event.target.value)  }/>
+                </form>
+                <form className={classes.margin} noValidate autoComplete="off">
+                    <Button variant="outlined" color="primary" onClick={onLoginButtonClick}> Login </Button>
+                </form>
+                <div>
+                    <Typography variant="h6" color="secondary"> 
+                        { 
+                            appMessages.isBusy ? "Validating Login ..." 
+                            : (loginData.isLoggedIn ? "YES" : (isFirstTime ? "" : "Login Fail. Try again with valid UserId and Password.") )
+                        }
+                    </Typography>
+                </div>
             </div>
+            
             <span> &nbsp; </span>
         
         </Paper>
+        </Container>
         </React.Fragment>
         </React.StrictMode>
     )

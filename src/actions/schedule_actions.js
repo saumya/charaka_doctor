@@ -96,3 +96,29 @@ const call_CreatePrescriptionAPI = (prescription)=>{
     return fetch(url_1,fetch_data)
 }
 // === create Prescription / ===
+
+// === Delete A Schedule ===
+export const deleteScheduleAction = scheduleId=>{
+    return function(dispatch){
+        dispatch( changeStatusAsBusy(true) )
+        call_deleteScheduleAPI(scheduleId).then(function(success){
+            console.log( 'call_deleteScheduleAPI : SUCCESS' )
+            console.log('success', success)
+            dispatch( changeStatusAsBusy(false) )
+        },function(error_1){
+            console.log( 'call_deleteScheduleAPI : ERROR' )
+            console.log( error_1 )
+            dispatch( changeStatusAsBusy(false) )
+        })
+    }
+}
+const call_deleteScheduleAPI = (scheduleId)=>{
+    const url_1 = ApiObj.endpoint + ApiObj.version + ApiObj.delete.delete_schedule
+    const fetch_data = {
+        method: 'DELETE', 
+        mode: 'cors', headers: new Headers({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({scheduleId : scheduleId})
+    }
+    return fetch(url_1,fetch_data)
+}
+// === Delete A Schedule / ===

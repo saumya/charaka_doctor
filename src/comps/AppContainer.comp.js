@@ -7,7 +7,6 @@ import MaterialAppContainer from './MaterialAppContainer'
   const AppContainer = ()=>{
     return (
       <React.Fragment>
-        <CssBaseline />
         <MaterialAppContainer />
       </React.Fragment>
     );

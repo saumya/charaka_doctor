@@ -13,7 +13,9 @@ const apiObj = {
         update_schedule : '/updateSchedule/',
     },
     /* =============================== DELETE ================================== */
-    delete: {},
+    delete: {
+        delete_schedule : '/deleteSchedule/',
+    },
     /* =============================== GET ================================== */
     get: {
         all_schedules_by_doctor_id : '/getSchedulesByDoctorId/',

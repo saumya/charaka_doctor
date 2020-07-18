@@ -72,7 +72,7 @@ const AppbarMenu = ()=>{
                     </IconButton>
                     <Typography variant="h6" className={classes.title}> Doctor | {loginData.loginUserObject.name} </Typography>
                     
-                    <Typography variant="h6"> Sun Moon Clinic </Typography>
+                    <Typography variant="h6"> FindHealth </Typography>
                 </Toolbar>
             </AppBar>
             <Drawer variant="temporary" anchor="left" open={ shouldShowSidebar } onClose={ hideSideBar }>
