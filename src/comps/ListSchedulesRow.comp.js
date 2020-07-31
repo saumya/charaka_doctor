@@ -49,6 +49,10 @@ const ListSchedulesRowComponent = (props)=>{
         console.log('onDeleteScheduleClick', item)
         dispatch( deleteScheduleAction(item.id) )
     }
+
+    const onJoinWebConference = (url)=>{
+        console.log('onJoinWebConference : url', url)
+    }
     
     return(
         <React.Fragment> 
@@ -59,9 +63,13 @@ const ListSchedulesRowComponent = (props)=>{
                 <Typography variant="h6" color="primary">
                     { props.rowData.is_morning ? <WbSunnyIcon /> : <Brightness2Icon /> }
                     { new Date(props.rowData.on_date).toDateString() }
+                    { props.rowData.isWeb 
+                        ? ( <span style={{ marginLeft:"4px" }}> <Button size="small" variant="outlined" color="primary" onClick={ ()=>{ onJoinWebConference(props.rowData.webURL) } }> Join Web at {props.rowData.web_at_time} </Button> </span> )
+                        : "" }
                 </Typography>
+
             
-                <Button startIcon={<UpdateIcon />}onClick={()=>{ onDetails(props.rowData) }}> Update </Button>
+                <Button startIcon={<UpdateIcon />} onClick={()=>{ onDetails(props.rowData) }}> Update </Button>
                 <Button startIcon={<LocalHospitalIcon />} onClick={()=>{ onPrescription(props.rowData) }}> Prescribe </Button>
                 <Button startIcon={<HighlightOffIcon />} onClick={()=>{ onDeleteScheduleClick(props.rowData) }} color="secondary"> Delete </Button>
 

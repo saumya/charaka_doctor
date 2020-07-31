@@ -13,8 +13,9 @@ import Paper from '@material-ui/core/Paper'
 
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
+import CachedIcon from '@material-ui/icons/Cached';
 
-import TableSchedules from './TableSchedules.comp'
+//import TableSchedules from './TableSchedules.comp'
 import ListSchedulesComponent from './ListSchedules.comp'
 
 const useStyles = makeStyles((theme) => ({
@@ -62,7 +63,7 @@ const SchedulesContainer = ()=>{
         <React.Fragment>
             <Typography variant="h2" gutterBottom> Schedules </Typography>
             <form className={classes.margin} noValidate autoComplete="off">
-                <Button variant="contained" onClick={onGetDataFromServer}> Get </Button>
+                <Button variant="contained" endIcon={<CachedIcon />} onClick={onGetDataFromServer}> Update Schedules List </Button>
             </form>
 
             <Paper elevation={4}>
