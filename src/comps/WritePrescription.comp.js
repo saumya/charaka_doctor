@@ -38,9 +38,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WritePrescriptionComponent = (props)=>{
+    
     const dispatch = useDispatch()
-
     const classes = useStyles()
+    const appMessages = useSelector( state=> state.messages )
 
     const today = new Date()
     const mString = today=>{
@@ -113,9 +114,10 @@ const WritePrescriptionComponent = (props)=>{
             <div style={{ marginRight: "1em" }}>
                 <h1>Write Prescription</h1>
                 
-                <Card>
+                <Card variant="outlined">
+                    <div style={{ background:"#eee"}}>
                     <CardContent>
-                        <div style={{ background:"#fff"}}>
+                        <div style={{ background:"#ff0"}}>
                             {/* JSON.stringify(props) doctorId, personId, groupId */}
                             { /*
                             <Button size="small" variant="contained" color="secondary" onClick={ onPatientDetailsClick }> Details of Patient </Button>
@@ -148,8 +150,10 @@ const WritePrescriptionComponent = (props)=>{
                         </div>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" variant="outlined" color="secondary" onClick={onPrescription}> Prescription Done </Button>
+                        <Button size="small" variant="contained" color="secondary" onClick={onPrescription}> Prescribe </Button>
                     </CardActions>
+                    </div>
+                    <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
                 </Card>
                 <h5>Make sure to click "Prescription Done" button Above</h5>
             </div>

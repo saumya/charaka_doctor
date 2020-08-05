@@ -63,7 +63,7 @@ const SchedulesContainer = ()=>{
         <React.Fragment>
             <Typography variant="h2" gutterBottom> Schedules </Typography>
             <form className={classes.margin} noValidate autoComplete="off">
-                <Button variant="contained" endIcon={<CachedIcon />} onClick={onGetDataFromServer}> Update Schedules List </Button>
+                <Button variant="contained" endIcon={<CachedIcon />} onClick={onGetDataFromServer}> Get All </Button>
             </form>
 
             <Paper elevation={4}>

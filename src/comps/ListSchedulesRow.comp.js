@@ -52,6 +52,10 @@ const ListSchedulesRowComponent = (props)=>{
 
     const onJoinWebConference = (url)=>{
         console.log('onJoinWebConference : url', url)
+        //
+        const windowFeatures = "menubar=no,location=no,resizable=yes,scrollbars=no,status=no"
+        const newWindow = window.open( url, 'FH:WebConferencing', windowFeatures)
+        window.console.log('newWindow:', newWindow )
     }
     
     return(
@@ -61,7 +65,7 @@ const ListSchedulesRowComponent = (props)=>{
             <div style={{ margin:"4px"}}>
 
                 <Typography variant="h6" color="primary">
-                    { props.rowData.is_morning ? <WbSunnyIcon /> : <Brightness2Icon /> }
+                    { props.rowData.is_morning ? <span style={{ marginRight:"1em" }}><WbSunnyIcon /></span> : <span style={{ marginRight:"1em" }}><Brightness2Icon /></span> }
                     { new Date(props.rowData.on_date).toDateString() }
                     { props.rowData.isWeb 
                         ? ( <span style={{ marginLeft:"4px" }}> <Button size="small" variant="outlined" color="primary" onClick={ ()=>{ onJoinWebConference(props.rowData.webURL) } }> Join Web at {props.rowData.web_at_time} </Button> </span> )
