@@ -60,8 +60,15 @@ const ListSchedulesRowDetailsComponent = (props)=>{
     }
     const onJoinWebConference = ()=>{
       window.console.log('onJoinWebConference', detailObj.webURL)
+      /*
       const windowFeatures = "menubar=no,location=no,resizable=yes,scrollbars=no,status=no"
       const newWindow = window.open(detailObj.webURL, 'FH:WebConferencing', windowFeatures)
+      window.console.log('newWindow:', newWindow )
+      */
+      const url = detailObj.webURL
+      const urlMeeting = 'meeting.html' + '#' + url
+      const windowFeatures = "menubar=no,location=no,resizable=yes,scrollbars=no,status=no"
+      const newWindow = window.open(urlMeeting, 'FH:WebConferencing', windowFeatures)
       window.console.log('newWindow:', newWindow )
     }
 
