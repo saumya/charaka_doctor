@@ -10,6 +10,8 @@ Doctor UI for managing the profile and schedules.
  - [x] Write Prescriptions
  - [x] Logout
 
+ - [x] Iteration Design 2
+
 ### Technology
 
  - [ReactJS][react]
