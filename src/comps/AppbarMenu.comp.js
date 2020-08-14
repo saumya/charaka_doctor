@@ -70,7 +70,7 @@ const AppbarMenu = ()=>{
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={showSideBar}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" className={classes.title}> Doctor | {loginData.loginUserObject.name} </Typography>
+                    <Typography variant="h6" className={classes.title}> {loginData.loginUserObject.name} </Typography>
                     
                     <Typography variant="h6"> FindHealth </Typography>
                 </Toolbar>

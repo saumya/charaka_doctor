@@ -111,8 +111,6 @@ const WritePrescriptionComponent = (props)=>{
     //
     return(
         <React.Fragment>
-            <div style={{ marginRight: "1em" }}>
-                <h1>Write Prescription</h1>
                 
                 <Card variant="outlined">
                     <div style={{ background:"#eee"}}>
@@ -126,7 +124,8 @@ const WritePrescriptionComponent = (props)=>{
                         </div>
                         <div>
                             <form className={classes.margin} noValidate autoComplete="off">
-                                <Typography variant="h6"> Schedule Id : { props.data.id } </Typography>
+                                {/* <Typography variant="h6"> Schedule Id : { props.data.id } </Typography> */}
+                                <Typography variant="h6"> Write Prescription </Typography>
                             </form>
                             <form className={classes.margin} noValidate autoComplete="off">
                                 <TextField label="Observations" variant="outlined" fullWidth onChange={ event => setObservations(event.target.value) } />
@@ -150,13 +149,12 @@ const WritePrescriptionComponent = (props)=>{
                         </div>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" variant="contained" color="secondary" onClick={onPrescription}> Prescribe </Button>
+                        <Button size="large" variant="contained" color="secondary" onClick={onPrescription}> Prescribe </Button>
                     </CardActions>
                     </div>
                     <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
                 </Card>
-                <h5>Make sure to click "Prescription Done" button Above</h5>
-            </div>
+                
             
         </React.Fragment>
     )
