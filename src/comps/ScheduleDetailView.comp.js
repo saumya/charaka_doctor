@@ -33,7 +33,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 import WritePrescriptionComponent from './WritePrescription.comp'
 
-import { updateSinlgeScheduleForDoctorAction } from '../actions'
+import { updateSinlgeScheduleForDoctorAction, 
+            getPersonProfileAction, 
+            resetPersonProfileAction } from '../actions'
 
 
 
@@ -64,14 +66,17 @@ const ScheduleDetailViewComponent = (props)=>{
     const classes = useStyles()
     const dispatch = useDispatch() // React-Redux
     const appMessages = useSelector( state=> state.messages )
+    const patientDataObj = useSelector( state=> state.patientData )
 
     const [isWeb, setIsWeb]= useState(props.detailsObj.isWeb)
     const [webTime, setWebTime]= useState(props.detailsObj.web_at_time)
 
     const toggleWebChecked = ()=> setIsWeb( !isWeb )
-    const onJoinWebConference = ()=> console.log('onJoinWebConference')
-    const onPersonDetailsClick = (personId)=>{
-        console.log('Person Id', personId)
+    /* const onJoinWebConference = ()=> console.log('onJoinWebConference') */
+    const onPersonDetailsClick = (personId)=> dispatch( getPersonProfileAction(personId) )
+    const onCloseClick = ()=>{
+        dispatch( resetPersonProfileAction() )
+        props.handleClose()
     }
 
     const onUpdateSchedule = ()=>{
@@ -101,7 +106,7 @@ const ScheduleDetailViewComponent = (props)=>{
                     <Typography variant="h6" className={classes.title}>
                         Schedule Details - {props.detailsObj.id}
                     </Typography>
-                    <Button color="inherit" onClick={props.handleClose}>
+                    <Button color="inherit" onClick={ onCloseClick }>
                         Back
                         <NavigateNextIcon />
                     </Button>
@@ -166,8 +171,25 @@ const ScheduleDetailViewComponent = (props)=>{
                         
                 <div style={{marginBottom:20}} />
 
-                {/* <Divider /> */}
-                <Button onClick={ ()=>{onPersonDetailsClick(props.detailsObj.personId)} } color="primary"> Person Details </Button>
+                {/*
+                <Divider />
+                <Button onClick={ ()=>{onPersonDetailsClick(props.detailsObj.personId)} } color="primary" variant="contained"> Person Details </Button>
+                */}
+                
+                <Grid key={3} item xs>
+                    <LinearProgress color="primary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
+                    <Paper style={{ padding:'2em' }} elevation={1}>
+                        <Button onClick={ ()=>{onPersonDetailsClick(props.detailsObj.personId)} } color="primary" variant="contained"> Get Patient Information </Button>
+
+                        <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.id } </Typography>
+                        <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.name } </Typography>
+                        <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.phone } </Typography>
+                        <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.email } </Typography>
+                        <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.address } </Typography>
+                    </Paper>
+                </Grid>
+
+                <div style={{marginBottom:20}} />
             </DialogContent>
             
             {/*
