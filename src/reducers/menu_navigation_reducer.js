@@ -3,7 +3,7 @@
 
 const initialState = {
     last_menu: '',
-    active_menu: ''
+    active_menu: 'SCHEDULE'
 }
 
 const menu_navigation = (state = initialState, action)=>{

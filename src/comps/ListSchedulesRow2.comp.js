@@ -15,7 +15,8 @@ import Badge from '@material-ui/core/Badge'
 import Button from '@material-ui/core/Button'
 
 import InfoIcon from '@material-ui/icons/Info'
-import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+//import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 import CreateIcon from '@material-ui/icons/Create'
 
@@ -52,7 +53,7 @@ const ListSchedulesRow2Component = (props)=>{
 
     return(
         <React.Fragment>
-            <ListItem button onClick={() => { alert('List') }}>
+            <ListItem button onClick={() => console.log('TODO: UX improvements') }>
                 <Chip avatar={<Avatar>{props.rowData.is_morning?"M":"E"}</Avatar>} label={props.rowData.id} variant="outlined" />
                 <ListItemIcon>
                     {
@@ -78,7 +79,7 @@ const ListSchedulesRow2Component = (props)=>{
                         <HighlightOffIcon />
                     </IconButton>
                     <IconButton edge="end" color="primary" onClick={() => { onDetails(props.rowData) }}>
-                        <InfoIcon />
+                        <ArrowForwardIosIcon />
                     </IconButton>
                 </ListItemSecondaryAction>
             </ListItem>

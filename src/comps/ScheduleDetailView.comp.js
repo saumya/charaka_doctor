@@ -12,7 +12,9 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
-import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+//import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+//import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -103,13 +105,19 @@ const ScheduleDetailViewComponent = (props)=>{
             
             <AppBar className={classes.appBar}>
                 <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
-                        Schedule Details - {props.detailsObj.id}
-                    </Typography>
-                    <Button color="inherit" onClick={ onCloseClick }>
-                        Back
-                        <NavigateNextIcon />
+                <Button color="inherit" onClick={ onCloseClick }>
+                        <ArrowBackIosIcon />
+                        
                     </Button>
+                    <Typography variant="h6" className={classes.title}>
+                        Schedule - {props.detailsObj.id}
+                    </Typography>
+                    {/*
+                    <Button color="inherit" onClick={ onCloseClick }>
+                        Done
+                        <ArrowForwardIosIcon />
+                    </Button>
+                    */}
                 </Toolbar>
             </AppBar>
 
@@ -128,7 +136,7 @@ const ScheduleDetailViewComponent = (props)=>{
                             <DialogContentText> On - { props.detailsObj.on_date } </DialogContentText>
                             <DialogContentText> { props.detailsObj.is_morning ? "Morning" : "Evening" }  </DialogContentText>
                             <DialogContentText> { props.detailsObj.isWeb ? "Web Meeting" : "In Person" } { props.detailsObj.isWeb ?  ' - ' + props.detailsObj.web_at_time : "" }  </DialogContentText>
-                            <DialogContentText> Person Id - { props.detailsObj.personId } </DialogContentText>
+                            <DialogContentText> Patient Id - { props.detailsObj.personId } </DialogContentText>
 
                         </Paper>
                     </Grid>
@@ -161,7 +169,7 @@ const ScheduleDetailViewComponent = (props)=>{
 
                 <div style={{marginBottom:20}} />
 
-                <Grid key={2} item xs>
+                <Grid item xs>
                     <Paper style={{ padding:'0em' }} elevation={1}>
                         {/* <Typography variant="h6" gutterBottom> Prescription </Typography> */}
                         <WritePrescriptionComponent data={props.detailsObj} />
@@ -176,16 +184,17 @@ const ScheduleDetailViewComponent = (props)=>{
                 <Button onClick={ ()=>{onPersonDetailsClick(props.detailsObj.personId)} } color="primary" variant="contained"> Person Details </Button>
                 */}
                 
-                <Grid key={3} item xs>
+                <Grid item xs>
                     <LinearProgress color="primary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
                     <Paper style={{ padding:'2em' }} elevation={1}>
-                        <Button onClick={ ()=>{onPersonDetailsClick(props.detailsObj.personId)} } color="primary" variant="contained"> Get Patient Information </Button>
+                        <Button onClick={ ()=>{onPersonDetailsClick(props.detailsObj.personId)} } color="primary" variant="contained"> Patient </Button>
 
                         <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.id } </Typography>
                         <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.name } </Typography>
                         <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.phone } </Typography>
                         <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.email } </Typography>
                         <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.address } </Typography>
+
                     </Paper>
                 </Grid>
 
