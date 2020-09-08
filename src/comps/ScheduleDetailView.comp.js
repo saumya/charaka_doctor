@@ -34,6 +34,7 @@ import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 import WritePrescriptionComponent from './WritePrescription.comp'
+import PatientProfileComp from './PatientProfile.comp'
 
 import { updateSinlgeScheduleForDoctorAction, 
             getPersonProfileAction, 
@@ -187,14 +188,24 @@ const ScheduleDetailViewComponent = (props)=>{
                 <Grid item xs>
                     <LinearProgress color="primary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
                     <Paper style={{ padding:'2em' }} elevation={1}>
-                        <Button onClick={ ()=>{onPersonDetailsClick(props.detailsObj.personId)} } color="primary" variant="contained"> Patient </Button>
-
-                        <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.id } </Typography>
-                        <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.name } </Typography>
-                        <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.phone } </Typography>
-                        <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.email } </Typography>
-                        <Typography variant="h6" gutterBottom> { patientDataObj.patientObject.address } </Typography>
-
+                        <Button onClick={ ()=>{onPersonDetailsClick(props.detailsObj.personId)} } color="primary" variant="contained"> Patient Details </Button>
+                        
+                        <PatientProfileComp profile={patientDataObj.patientObject} />
+                        {/*
+                        <Typography variant="h4" gutterBottom> Contact </Typography>
+                        <Typography variant="h6" gutterBottom> Id - { patientDataObj.patientObject.id } </Typography>
+                        <Typography variant="h6" gutterBottom> Name - { patientDataObj.patientObject.name } </Typography>
+                        <Typography variant="h6" gutterBottom> Phone - { patientDataObj.patientObject.phone } </Typography>
+                        <Typography variant="h6" gutterBottom> Email - { patientDataObj.patientObject.email } </Typography>
+                        <Typography variant="h6" gutterBottom> Address - { patientDataObj.patientObject.address } </Typography>
+                        
+                        <Typography variant="h4" gutterBottom> Basic Body </Typography>
+                        <Typography variant="h6" gutterBottom> Gender - { patientDataObj.patientObject.gender } </Typography>
+                        <Typography variant="h6" gutterBottom> Age - { patientDataObj.patientObject.age } </Typography>
+                        <Typography variant="h6" gutterBottom> Height - { patientDataObj.patientObject.height } </Typography>
+                        <Typography variant="h6" gutterBottom> Weight - { patientDataObj.patientObject.weight } </Typography>
+                        <Typography variant="h6" gutterBottom> Blood Group - { patientDataObj.patientObject.bloodGroup } </Typography>
+                        */}
                     </Paper>
                 </Grid>
 
