@@ -2,10 +2,15 @@
 // @version: 1.0.0
 //
 import React from 'react'
+
+import Box from '@material-ui/core/Box'
+import Paper from '@material-ui/core/Paper'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
+
+import InfoLineComp from './InfoLine.comp'
 
 const PatientProfileComp = (props)=>{
     const onClose = ()=>{
@@ -14,7 +19,7 @@ const PatientProfileComp = (props)=>{
     return(
     <React.Fragment>
         <div style={{ marginTop:"1em"}} />
-        <Card>
+        <Box>
         {   
             ( props.profile.id 
             ? 
@@ -22,19 +27,19 @@ const PatientProfileComp = (props)=>{
                 <CardContent>
                     {/* JSON.stringify(props.profile) */}
                     
-                    <div style={{ fontSize:"1.4em" }}>Body Basics</div>
-                    <div>Gender - <span style={{fontWeight:"bold"}}>{props.profile.gender}</span></div>
-                    <div>Age - <span style={{fontWeight:"bold"}}>{props.profile.age}</span></div>
-                    <div>Height - <span style={{fontWeight:"bold"}}>{props.profile.height}</span></div>
-                    <div>Weight - <span style={{fontWeight:"bold"}}>{props.profile.weight}</span></div>
-                    <div>Blood Group - <span style={{fontWeight:"bold"}}>{props.profile.bloodGroup}</span></div>
+                    <div style={{ fontSize:"1.4em", color:"#9e9e9e" }}>Body Basics</div>
+                    <InfoLineComp label="Gender" value={props.profile.gender} />
+                    <InfoLineComp label="Age" value={props.profile.age} />
+                    <InfoLineComp label="Height" value={props.profile.height} />
+                    <InfoLineComp label="Weight" value={props.profile.weight} />
+                    <InfoLineComp label="Blood Group" value={props.profile.bloodGroup} />
 
-                    <div style={{ fontSize:"1.4em" }}>Contact Details</div>
-                    <div>id - <span style={{fontWeight:"bold"}}>{props.profile.id}</span></div>
-                    <div>Name - <span style={{fontWeight:"bold"}}>{props.profile.name}</span></div>
-                    <div>Phone - <span style={{fontWeight:"bold"}}>{props.profile.phone}</span></div>
-                    <div>Email - <span style={{fontWeight:"bold"}}>{props.profile.email}</span></div>
-                    <div>Address - <span style={{fontWeight:"bold"}}>{props.profile.address}</span></div>
+                    <div style={{ fontSize:"1.4em", color:"#9e9e9e" }}>Contact Details</div>
+                    <InfoLineComp label="Id" value={props.profile.id} />
+                    <InfoLineComp label="Name" value={props.profile.name} />
+                    <InfoLineComp label="Phone" value={props.profile.phone} />
+                    <InfoLineComp label="Email" value={props.profile.email} />
+                    <InfoLineComp label="Address" value={props.profile.address} />
                     
                 </CardContent>
                 {/*
@@ -47,7 +52,7 @@ const PatientProfileComp = (props)=>{
             : null 
             ) 
         }
-        </Card>
+        </Box>
     </React.Fragment>
     )
 }
